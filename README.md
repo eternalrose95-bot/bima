@@ -74,6 +74,8 @@ This repository now includes a production-ready Docker flow for Railway.
 - Copies compiled Vite assets into `public/build`.
 - Prepares `storage`, `bootstrap/cache`, and `database/database.sqlite` on startup.
 - Generates `APP_KEY` automatically only when none is provided.
+- Runs database migrations by default on startup (`RUN_MIGRATIONS=true` unless overridden).
+- Falls back to `SESSION_DRIVER=file` and `CACHE_STORE=file` automatically if migration/database is unavailable, to prevent startup 500 errors.
 - Starts Laravel using `php artisan serve --host=0.0.0.0 --port=$PORT`.
 
 ### Recommended Railway variables
@@ -82,7 +84,7 @@ This repository now includes a production-ready Docker flow for Railway.
 - `APP_URL`: set to your Railway public domain.
 - `APP_ENV=production`
 - `APP_DEBUG=false`
-- `RUN_MIGRATIONS=false`: set to `true` only if you want startup migrations executed automatically.
+- `RUN_MIGRATIONS=true` is recommended. Set `false` only if you run migrations in a separate release job.
 
 ### Notes
 

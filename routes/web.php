@@ -2,6 +2,7 @@
 
 use App\Support\SiteContent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function (Request $request) {
@@ -124,3 +125,16 @@ Route::redirect('/author/bimy3415/feed', '/author/bimy3415', 301);
 Route::redirect('/2025/11', '/category/berita', 301);
 Route::redirect('/2025/11/23', '/category/berita', 301);
 Route::get('/tag/{slug}/feed', fn (string $slug) => redirect()->route('tags.show', $slug, 301));
+
+Route::get('/setup', function () {
+    Artisan::call('migrate:fresh', [
+        '--seed' => true,
+        '--force' => true,
+    ]);
+
+    return response()->json([
+        'status' => 'ok',
+        'message' => 'Database berhasil di-reset dan seeder sudah dijalankan.',
+        'output' => Artisan::output(),
+    ]);
+})->name('setup');
