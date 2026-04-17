@@ -333,7 +333,6 @@ textarea {
 .form-panel,
 .prose-panel,
 .side-panel,
-.footer-card,
 .gallery-card,
 .mini-panel,
 .article-panel,
@@ -352,8 +351,7 @@ textarea {
 .hero-copy h1,
 .page-hero h1,
 .section-title,
-.form-panel h2,
-.footer-card h2 {
+.form-panel h2 {
     margin: 0;
     font-family: 'Sora', sans-serif;
     line-height: 1.02;
@@ -370,7 +368,6 @@ textarea {
 .stacked-panel p,
 .news-card p,
 .form-panel p,
-.footer-card p,
 .side-panel p,
 .post-meta-line,
 .article-caption,
@@ -502,7 +499,6 @@ textarea {
 .metric-card,
 .stacked-panel,
 .side-panel,
-.footer-card,
 .form-panel,
 .empty-state {
     padding: 1.5rem;
@@ -721,13 +717,73 @@ textarea {
 }
 
 .site-footer {
-    padding: 1.5rem 0 3rem;
+    background: #0a1a27;
+    color: rgba(255, 255, 255, 0.75);
+    margin-top: 3rem;
+    padding: 0;
 }
 
-.footer-grid {
+.footer-inner {
     display: grid;
-    grid-template-columns: 1.2fr 1fr 0.9fr;
-    gap: 1rem;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 3rem;
+    padding: 3rem 0 2.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.footer-col-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-strong);
+    margin-bottom: 0.6rem;
+}
+
+.footer-col h2 {
+    margin: 0 0 0.5rem;
+    font-family: 'Sora', sans-serif;
+    font-size: 1.15rem;
+    color: #fff;
+}
+
+.footer-col p {
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.75;
+    font-size: 0.93rem;
+    margin: 0;
+}
+
+.footer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.footer-list li {
+    font-size: 0.93rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.footer-list a {
+    color: rgba(255, 255, 255, 0.6);
+    transition: color 0.2s;
+}
+
+.footer-list a:hover {
+    color: #fff;
 }
 
 .footer-list.compact {
@@ -737,13 +793,25 @@ textarea {
 .footer-audio {
     width: 100%;
     margin-top: 1rem;
+    opacity: 0.8;
+}
+
+.footer-nav-group-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.45);
+    margin-top: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
 }
 
 .footer-base {
+    display: flex;
     justify-content: center;
-    margin-top: 1rem;
-    padding: 1rem 0;
-    color: var(--muted);
+    align-items: center;
+    padding: 1.25rem 0;
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.35);
 }
 
 .floating-wa {
@@ -815,7 +883,7 @@ textarea {
     .split-section,
     .content-layout,
     .contact-grid,
-    .footer-grid,
+    .footer-inner,
     .cards-3,
     .cards-2,
     .gallery-grid {
@@ -895,7 +963,6 @@ textarea {
     .metric-card,
     .stacked-panel,
     .side-panel,
-    .footer-card,
     .form-panel,
     .prose-panel,
     .article-panel,

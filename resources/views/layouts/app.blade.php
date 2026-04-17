@@ -78,9 +78,9 @@
     </main>
 
     <footer class="site-footer">
-        <div class="shell footer-grid">
-            <div class="footer-card">
-                <p class="section-kicker">Tentang</p>
+        <div class="shell footer-inner">
+            <div class="footer-col">
+                <span class="footer-col-title">Tentang</span>
                 <h2>{{ $company['name'] }}</h2>
                 <p>{{ $company['short_description'] }}</p>
                 <audio controls preload="none" class="footer-audio">
@@ -88,22 +88,22 @@
                 </audio>
             </div>
 
-            <div class="footer-card">
-                <p class="section-kicker">Kontak</p>
+            <div class="footer-col">
+                <span class="footer-col-title">Kontak</span>
                 <ul class="footer-list">
                     <li>{{ $company['address'] }}</li>
                     <li><a href="tel:{{ $company['phone'] }}">{{ $company['phone'] }}</a></li>
-                    <li><a href="https://wa.me/{{ $company['whatsapp'] }}" target="_blank" rel="noreferrer">{{ $company['phone'] }}</a></li>
+                    <li><a href="https://wa.me/{{ $company['whatsapp'] }}" target="_blank" rel="noreferrer">WhatsApp</a></li>
                     <li><a href="mailto:{{ $company['email'] }}">{{ $company['email'] }}</a></li>
                 </ul>
             </div>
 
-            <div class="footer-card">
-                <p class="section-kicker">Navigasi</p>
+            <div class="footer-col">
+                <span class="footer-col-title">Navigasi</span>
                 <ul class="footer-list">
                     @foreach ($navigation as $item)
                         @if (! empty($item['children']))
-                            <li>{{ $item['label'] }}</li>
+                            <li class="footer-nav-group-label">{{ $item['label'] }}</li>
                             @foreach ($item['children'] as $child)
                                 <li><a href="{{ route($child['route'], $child['params'] ?? []) }}">{{ $child['label'] }}</a></li>
                             @endforeach
