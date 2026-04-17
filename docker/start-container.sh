@@ -7,10 +7,53 @@ log() {
     echo "[container] $1"
 }
 
+sync_env_value() {
+    KEY="$1"
+    VALUE="$2"
+
+    if [ ! -f .env ]; then
+        return
+    fi
+
+    ESCAPED_VALUE=$(printf '%s' "$VALUE" | sed 's/[\/&]/\\&/g')
+
+    if grep -q "^${KEY}=" .env; then
+        sed -i "s/^${KEY}=.*/${KEY}=${ESCAPED_VALUE}/" .env
+    else
+        printf '\n%s=%s\n' "$KEY" "$VALUE" >> .env
+    fi
+}
+
 if [ ! -f .env ] && [ -f .env.example ]; then
     log "No .env found. Copying from .env.example"
     cp .env.example .env
 fi
+
+for KEY in \
+    APP_NAME \
+    APP_ENV \
+    APP_DEBUG \
+    APP_URL \
+    APP_KEY \
+    LOG_CHANNEL \
+    LOG_STACK \
+    LOG_LEVEL \
+    DB_CONNECTION \
+    DB_HOST \
+    DB_PORT \
+    DB_DATABASE \
+    DB_USERNAME \
+    DB_PASSWORD \
+    SESSION_DRIVER \
+    SESSION_DOMAIN \
+    CACHE_STORE \
+    QUEUE_CONNECTION; do
+    eval "CURRENT_VALUE=\${$KEY:-}"
+
+    if [ -n "${CURRENT_VALUE}" ]; then
+        sync_env_value "$KEY" "$CURRENT_VALUE"
+    fi
+done
 
 mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views storage/logs bootstrap/cache database
 touch database/database.sqlite
