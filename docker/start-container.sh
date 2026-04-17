@@ -30,7 +30,7 @@ if [ -z "${APP_KEY:-}" ] && [ -f .env ] && grep -q '^APP_KEY=base64:' .env; then
     fi
 fi
 
-php artisan optimize:clear --ansi || true
+CACHE_STORE=file php artisan optimize:clear --ansi || true
 
 RUN_MIGRATIONS_VALUE="${RUN_MIGRATIONS:-true}"
 MIGRATION_OK="false"
