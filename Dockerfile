@@ -47,7 +47,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libsqlite3-dev \
     libzip-dev \
     zip \
-    && docker-php-ext-install bcmath intl pdo_sqlite opcache \
+    && docker-php-ext-install bcmath intl pdo_mysql pdo_sqlite opcache \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=composer_deps /app /var/www/html

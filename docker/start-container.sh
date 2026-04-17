@@ -56,5 +56,10 @@ if [ "${CACHE_STORE:-file}" = "database" ] && [ "$MIGRATION_OK" != "true" ]; the
     export CACHE_STORE="file"
 fi
 
+if [ "${QUEUE_CONNECTION:-sync}" = "database" ] && [ "$MIGRATION_OK" != "true" ]; then
+    log "QUEUE_CONNECTION=database but migrations unavailable. Falling back to sync queue"
+    export QUEUE_CONNECTION="sync"
+fi
+
 log "Starting Laravel server on port ${PORT:-8080}"
 exec php artisan serve --host=0.0.0.0 --port="${PORT:-8080}"
