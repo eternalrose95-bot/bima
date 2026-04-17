@@ -21,6 +21,15 @@ if [ -z "${APP_KEY:-}" ] && [ -f .env ] && ! grep -q '^APP_KEY=base64:' .env; th
     php artisan key:generate --force --ansi
 fi
 
+if [ -z "${APP_KEY:-}" ] && [ -f .env ] && grep -q '^APP_KEY=base64:' .env; then
+    APP_KEY_FROM_ENV_FILE="$(grep '^APP_KEY=' .env | tail -n 1 | cut -d '=' -f2-)"
+
+    if [ -n "$APP_KEY_FROM_ENV_FILE" ]; then
+        log "Exporting APP_KEY from .env for current runtime"
+        export APP_KEY="$APP_KEY_FROM_ENV_FILE"
+    fi
+fi
+
 php artisan optimize:clear --ansi || true
 
 RUN_MIGRATIONS_VALUE="${RUN_MIGRATIONS:-true}"
