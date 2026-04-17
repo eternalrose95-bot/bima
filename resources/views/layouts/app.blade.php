@@ -17,6 +17,7 @@
 <body>
     @php($company = config('site.company'))
     @php($navigation = config('site.navigation'))
+    @php($footerNavigation = config('site.footer_navigation'))
 
     <div class="orb orb-one"></div>
     <div class="orb orb-two"></div>
@@ -101,15 +102,8 @@
             <div class="footer-col">
                 <span class="footer-col-title">Navigasi</span>
                 <ul class="footer-list">
-                    @foreach ($navigation as $item)
-                        @if (! empty($item['children']))
-                            <li class="footer-nav-group-label">{{ $item['label'] }}</li>
-                            @foreach ($item['children'] as $child)
-                                <li><a href="{{ route($child['route'], $child['params'] ?? []) }}">{{ $child['label'] }}</a></li>
-                            @endforeach
-                        @else
-                            <li><a href="{{ route($item['route'], $item['params'] ?? []) }}">{{ $item['label'] }}</a></li>
-                        @endif
+                    @foreach ($footerNavigation as $item)
+                        <li><a href="{{ route($item['route'], $item['params'] ?? []) }}">{{ $item['label'] }}</a></li>
                     @endforeach
                 </ul>
             </div>

@@ -28,6 +28,13 @@ return [
         ['label' => 'Berita', 'route' => 'news.index'],
         ['label' => 'Kontak', 'route' => 'contact'],
     ],
+    'footer_navigation' => [
+        ['label' => 'Home', 'route' => 'home'],
+        ['label' => 'Tentang Kami', 'route' => 'pages.about'],
+        ['label' => 'Gallery', 'route' => 'gallery'],
+        ['label' => 'Berita', 'route' => 'news.index'],
+        ['label' => 'Kontak', 'route' => 'contact'],
+    ],
     'home' => [
         'meta_title' => 'Bima Meditama Samudera Sejahtera - Digital Radiologi & Konsultan',
         'meta_description' => 'Bima Meditama Samudera Sejahtera adalah mitra untuk solusi radiologi digital, alat kesehatan, dan peralatan laboratorium bagi klinik, rumah sakit, dan fasilitas kesehatan.',
