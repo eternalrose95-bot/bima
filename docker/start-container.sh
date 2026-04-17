@@ -7,6 +7,12 @@ log() {
     echo "[container] $1"
 }
 
+format_env_value() {
+    VALUE="$1"
+    ESCAPED_VALUE=$(printf '%s' "$VALUE" | sed 's/\\/\\\\/g; s/"/\\"/g')
+    printf '"%s"' "$ESCAPED_VALUE"
+}
+
 sync_env_value() {
     KEY="$1"
     VALUE="$2"
@@ -15,12 +21,13 @@ sync_env_value() {
         return
     fi
 
-    ESCAPED_VALUE=$(printf '%s' "$VALUE" | sed 's/[\/&]/\\&/g')
+    FORMATTED_VALUE=$(format_env_value "$VALUE")
+    ESCAPED_VALUE=$(printf '%s' "$FORMATTED_VALUE" | sed 's/[\/&]/\\&/g')
 
     if grep -q "^${KEY}=" .env; then
         sed -i "s/^${KEY}=.*/${KEY}=${ESCAPED_VALUE}/" .env
     else
-        printf '\n%s=%s\n' "$KEY" "$VALUE" >> .env
+        printf '\n%s=%s\n' "$KEY" "$FORMATTED_VALUE" >> .env
     fi
 }
 
