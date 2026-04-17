@@ -80,7 +80,7 @@
         </div>
     </section>
 
-    <section class="shell gallery-preview">
+    {{-- <section class="shell gallery-preview">
         <div class="section-head">
             <div>
                 <p class="section-kicker">Visual</p>
@@ -115,5 +115,5 @@
         </div>
 
         <livewire:news-browser :show-all="false" :limit="2" />
-    </section>
+    </section> --}}
 @endsection

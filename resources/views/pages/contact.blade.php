@@ -14,19 +14,22 @@
         <div class="contact-stack">
             <iframe class="contact-map" src="{{ $contact['map_embed'] }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
 
-            <div class="cards-grid cards-3 compact-grid">
-                @foreach ($contact['cards'] as $card)
-                    <a class="feature-card compact-card" href="{{ $card['href'] }}" @if (str_starts_with($card['href'], 'http')) target="_blank" rel="noreferrer" @endif>
-                        <span class="feature-index">0{{ $loop->iteration }}</span>
-                        <h3>{{ $card['label'] }}</h3>
-                        <p>{{ $card['value'] }}</p>
-                    </a>
-                @endforeach
-            </div>
-
-            <article class="side-panel muted">
-                <p class="section-kicker">Alamat</p>
-                <p>{{ config('site.company.address') }}</p>
+            <article class="side-panel contact-details-panel muted">
+                <p class="section-kicker">Informasi Kontak</p>
+                <ul class="contact-details-list">
+                    @foreach ($contact['cards'] as $card)
+                        <li class="contact-details-item">
+                            <span class="contact-details-label">{{ $card['label'] }}</span>: 
+                            <a href="{{ $card['href'] }}" @if (str_starts_with($card['href'], 'http')) target="_blank" rel="noreferrer" @endif>
+                                {{ $card['value'] }}
+                            </a>
+                        </li>
+                    @endforeach
+                    <li class="contact-details-item is-address">
+                        <span class="contact-details-label">Alamat</span>
+                        <p>{{ config('site.company.address') }}</p>
+                    </li>
+                </ul>
             </article>
         </div>
 
